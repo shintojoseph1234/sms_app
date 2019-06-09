@@ -127,15 +127,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-# static files directory
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# media files directory
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT  = os.path.join(BASE_DIR, 'static')
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#
+#
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+# # static files directory
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# # media files directory
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#
+# # https://docs.djangoproject.com/en/1.9/howto/static-files/
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#
+# # Extra places for collectstatic to find static files.
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+#
+# # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
