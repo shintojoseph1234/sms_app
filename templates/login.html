@@ -1,0 +1,98 @@
+{%extends 'base.html'%}
+{%block container%}
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<!-- <img src="static/images/img-01.png" alt="IMG"> -->
+				</div>
+
+					<!-- form with details to post -->
+	        <form method="post" id="login_form">
+	          {% csrf_token %}
+
+					<span class="login100-form-title">
+						Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<!-- submit button onclick calls submit_from() ajax fundtion-->
+						<input  class="login100-form-btn" type="button" value="Login" onclick="submit_from()" />
+					</div>
+
+					<div class="text-center p-t-12">
+						<a href="{% url 'register' %}" class="txt2" href="#">
+							Register
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="application/javascript">
+
+
+  function submit_from() {
+
+				url_path = "{%  url 'login' %}";
+				// form id
+				form_id = "#login_form"
+        // obtaining the form data
+         var formData = new FormData($(form_id)[0]);
+         // ajax start
+         $.ajax({
+                // url to which ajax is pointed
+                 url: url_path,
+                 // method :POST
+                 type: 'POST',
+                 // obtained formdata
+                 data: formData,
+                 async: true,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+
+                 // successfull response of ajax request
+                 success: function(response_data) {
+
+                   if(response_data.status=='success')
+                   {
+										 window.location = "{% url 'add' %}";
+                   }
+                 }
+         }); // end of $.ajax
+  }
+
+</script>
+
+{%endblock%}
