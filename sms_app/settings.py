@@ -25,7 +25,7 @@ SECRET_KEY = 'wwx_w$76=xse8nyj-x&qhi#1!)(ui%_r(+x@$grzl(t-yl1p9a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['smsapp126.herokuapp.com']
+ALLOWED_HOSTS = ['smsapp126.herokuapp.com', 'localhost']
 
 
 

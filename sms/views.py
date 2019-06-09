@@ -107,6 +107,7 @@ def signout(request):
 
 
 
+from sms.sendsms import sending_sms
 @api_view(['POST'])
 @method_decorator(csrf_exempt, name='dispatch')
 def send_sms(request):
@@ -122,28 +123,14 @@ def send_sms(request):
         phone_numbers = ''
         for each in phone_query_set:
             phone_numbers = phone_numbers +","+ each['phone']
-            break
 
-        print (phone_numbers)
         message = "Your friend "+email+" met with an emergency situation at location "+location
-        print (message)
-
-        url = "https://www.fast2sms.com/dev/bulk"
-        headers = {
-                    'authorization': "ucmdDpw3FEaBMo1XAlqGL8nrbJ6jeK07HzUgtP5SsIvRWQ42kZwkDjS5eXPJb9R1CVmMW0KzoYapQZv7",
-                    'Content-Type': "application/x-www-form-urlencoded",
-                    'Cache-Control': "no-cache",
-                }
-        # payload
-        payload = "sender_id=FSTSMS&message="+message+"&language=english&route=p&numbers="+phone_numbers
-        # send
-        print ("here...")
-        response = requests.request("POST", url, data=payload, headers=headers)
+        messages, returns = sending_sms(message, phone_numbers)
 
         success = [{
                     "status": "success",
                     "data": {
-                        "message": response.text['message']
+                        "message": messages
                     }
                 }]
     except:
@@ -153,8 +140,6 @@ def send_sms(request):
                         "message": "Message sending failed"
                     }
                 }]
-
-
 
 
     return Response(success, status=status.HTTP_200_OK)
